@@ -2,24 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Module } from '@nestjs/common';
 import { SocioService } from './socio.service';
+import { SocioEntity } from './socio.entity';
 
 @Module({
-  providers: [SocioService]
+  imports: [TypeOrmModule.forFeature([SocioEntity])],
+  providers: [SocioService],
+  //controllers: [SocioController]
 })
-export class SocioModule {
-  constructor(
-    @InjectRepository(SocioService)
-    private readonly museumRepository: Repository<SocioService>
-){}
-
-
-
-
-
-
-
-
-}
+export class SocioModule {}
