@@ -21,7 +21,7 @@ import { ClubEntity } from './club/club.entity';
       entities: [ClubEntity, SocioEntity],
       dropSchema: true,
       synchronize: true,
-      keepConnectionAlive: true
+      keepConnectionAlive: true,
     }),
   ],
   controllers: [AppController],

@@ -16,6 +16,6 @@ export class SocioEntity {
   @Column()
   birthdate: Date;
 
-  @OneToMany(() => ClubEntity, club => club.socios)
+  @OneToMany(() => ClubEntity, club => club.socio)
   clubs: ClubEntity[];
 }
