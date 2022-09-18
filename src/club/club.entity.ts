@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, EntitySchemaOptions, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, EntitySchemaOptions, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { SocioEntity } from 'src/socio/socio.entity';
 
 @Entity()
@@ -18,6 +18,6 @@ export class ClubEntity {
   @Column()
   description: string;
 
-  @ManyToOne(() => SocioEntity, socio => socio.clubs)
-  socio: SocioEntity;
+  @OneToMany(() => SocioEntity, socio => socio.clubs)
+  socios: SocioEntity[];
 }
