@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SocioEntity } from 'src/socio/socio.entity';
 import { ClubEntity } from 'src/club/club.entity';
 import { Repository } from 'typeorm';
-import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
+import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 
 @Injectable()
 export class ClubSocioService {
@@ -27,7 +27,7 @@ export class ClubSocioService {
       throw new BusinessLogicException("Id de Club no encontrado", BusinessError.NOT_FOUND);
 
     club.socios = [...club.socios, socio];
-    return await this.clubRepository.save(club)
+    return await this.socioRepository.save(club)
 
   }
   
