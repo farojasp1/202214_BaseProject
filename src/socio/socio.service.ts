@@ -35,15 +35,15 @@ export class SocioService {
   }
 
   async update(id: string, socio: SocioEntity): Promise<SocioEntity> {
-    const socio: SocioEntity = await this.socioRepository.findOne({where:{id}});
-    if (!socio)
+    const persistedSocio: SocioEntity = await this.socioRepository.findOne({where:{id}});
+    if (!persistedSocio)
       throw new BusinessLogicException("id de socio no encontrado", BusinessError.NOT_FOUND);
 
-    if (!IsEmail(socio.email))
+    if (!IsEmail(persistedSocio.email))
       throw new BusinessLogicException("email de socio no invalido", BusinessError.NOT_FOUND);
 
-    socio.id = id; 
-    return await this.socioRepository.save(socio);
+    //socio.id = id; 
+    return await this.socioRepository.save({...persistedSocio, ...socio});
   }
 
   async delete(id: string) {
@@ -53,5 +53,4 @@ export class SocioService {
 
     await this.socioRepository.remove(socio);
   }
-
 }

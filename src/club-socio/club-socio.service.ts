@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SocioEntity } from 'src/socio/socio.entity';
@@ -22,12 +23,12 @@ export class ClubSocioService {
       throw new BusinessLogicException("Id de Socio no encontrado", BusinessError.NOT_FOUND);
 
     const club: ClubEntity = await this.clubRepository.findOne({where: {id: clubId}, relations: ["socios"]})
-
     if (!club)
       throw new BusinessLogicException("Id de Club no encontrado", BusinessError.NOT_FOUND);
 
     club.socios = [...club.socios, socio];
-    return await this.clubRepository.save(club);
+    return await this.clubRepository.save(club)
+
   }
   
 //   findMembersFromClub:
@@ -88,13 +89,11 @@ async deleteMemberFromClub(clubId: string, socioId: string){
       throw new BusinessLogicException("Id de Club no encontrado", BusinessError.NOT_FOUND)
 
     const clubSocio: SocioEntity = club.socios.find(e => e.id === socio.id);
-
     if (!clubSocio)
       throw new BusinessLogicException("El socio no se encuentra afiliado al club", BusinessError.PRECONDITION_FAILED)
 
     club.socios = club.socios.filter(e => e.id !== socioId);
     await this.clubRepository.save(club);
-}   
-
+}
 
 }
